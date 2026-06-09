@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card shadow p-4">
+
+<h2>
+ATS Analysis Report
+</h2>
+
+<hr>
+
+<h3>
+
+ATS Score:
+
+<span class="badge bg-success">
+
+{{ report.score }}%
+
+</span>
+
+</h3>
+
+<hr>
+
+<h4>
+Missing Keywords
+</h4>
+
+<ul>
+
+{% for keyword in report.missing_keywords %}
+
+<li>
+
+{{ keyword }}
+
+</li>
+
+{% endfor %}
+
+</ul>
+
+<hr>
+
+<h4>
+Suggestions
+</h4>
+
+<ul>
+
+{% for item in report.suggestions %}
+
+<li>
+
+{{ item }}
+
+</li>
+
+{% endfor %}
+
+</ul>
+
+</div>
+
+{% endblock %}

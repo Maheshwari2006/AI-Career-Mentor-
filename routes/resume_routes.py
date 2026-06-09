@@ -17,15 +17,19 @@ from flask_login import (
 
 from werkzeug.utils import secure_filename
 
-from flask import Blueprint, render_template
-
 from database.models import db
 from database.models.resume import Resume
-from database.models.user import User
 
 from services.file_service import (
-    save_file,
     allowed_file
+)
+
+from nlp.resume_parser import (
+    ResumeParser
+)
+
+from services.ats_service import (
+    ATSAnalyzer
 )
 
 resume_bp = Blueprint(
@@ -34,8 +38,10 @@ resume_bp = Blueprint(
 )
 
 
-@resume_bp.route("/upload-resume",
-                 methods=["GET", "POST"])
+@resume_bp.route(
+    "/upload-resume",
+    methods=["GET", "POST"]
+)
 @login_required
 def upload_resume():
 
@@ -44,23 +50,21 @@ def upload_resume():
         if "resume" not in request.files:
 
             flash("No File Selected")
-
-            return redirect(
-                request.url
-            )
+            return redirect(request.url)
 
         file = request.files["resume"]
 
         if file.filename == "":
 
             flash("Please Select a File")
+            return redirect(request.url)
 
-            return redirect(
-                request.url
+        if file and allowed_file(file.filename):
+
+            os.makedirs(
+                current_app.config["UPLOAD_FOLDER"],
+                exist_ok=True
             )
-
-        if file and allowed_file(
-                file.filename):
 
             filename = secure_filename(
                 file.filename
@@ -124,15 +128,8 @@ def download_resume(filename):
         filename,
         as_attachment=True
     )
-from services.file_service import (
-    save_file
-)
 
-#Add Parse Route
 
-from nlp.resume_parser import (
-    ResumeParser
-)
 @resume_bp.route(
     "/parse-resume/<int:id>"
 )
@@ -152,4 +149,32 @@ def parse_resume(id):
     return render_template(
         "parsed_resume.html",
         result=result
+    )
+
+
+@resume_bp.route(
+    "/ats-analyzer/<int:id>"
+)
+@login_required
+def ats_analyzer(id):
+
+    resume = Resume.query.get_or_404(
+        id
+    )
+
+    parser = ResumeParser(
+        resume.file_path
+    )
+
+    parsed_data = parser.parse()
+
+    analyzer = ATSAnalyzer(
+        parsed_data
+    )
+
+    report = analyzer.analyze()
+
+    return render_template(
+        "ats_report.html",
+        report=report
     )
