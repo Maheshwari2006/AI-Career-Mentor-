@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card shadow p-4">
+
+    <h2>
+        Resume History
+    </h2>
+
+    <hr>
+
+    <table class="table table-bordered table-hover">
+
+        <thead>
+
+            <tr>
+
+                <th>ID</th>
+                <th>File Name</th>
+                <th>ATS Score</th>
+                <th>Action</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {% for resume in resumes %}
+
+            <tr>
+
+                <td>
+                    {{ resume.id }}
+                </td>
+
+                <td>
+                    {{ resume.file_name }}
+                </td>
+
+                <td>
+                    {{ resume.ats_score }}
+                </td>
+
+                <td>
+
+                    <a href="/download/{{ resume.file_name }}"
+                       class="btn btn-success btn-sm">
+                        Download
+                    </a>
+
+                    <a href="/parse-resume/{{ resume.id }}"
+                       class="btn btn-primary btn-sm">
+                        Parse
+                    </a>
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}

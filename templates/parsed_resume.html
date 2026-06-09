@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card p-4 shadow">
+
+<h2>
+Parsed Resume
+</h2>
+
+<hr>
+
+<h4>
+Skills
+</h4>
+
+<ul>
+
+{% for skill in result.skills %}
+
+<li>{{ skill }}</li>
+
+{% endfor %}
+
+</ul>
+
+<hr>
+
+<h4>
+Education
+</h4>
+
+<ul>
+
+{% for edu in result.education %}
+
+<li>{{ edu }}</li>
+
+{% endfor %}
+
+</ul>
+
+<hr>
+
+<h4>
+Projects
+</h4>
+
+<ul>
+
+{% for project in result.projects %}
+
+<li>{{ project }}</li>
+
+{% endfor %}
+
+</ul>
+
+<hr>
+
+<h4>
+Experience
+</h4>
+
+<ul>
+
+{% for exp in result.experience %}
+
+<li>{{ exp }}</li>
+
+{% endfor %}
+
+</ul>
+
+</div>
+
+{% endblock %}
