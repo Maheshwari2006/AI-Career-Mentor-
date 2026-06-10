@@ -289,3 +289,42 @@ def career_prediction(id):
         "career_prediction.html",
         result=result
     )
+    
+from services.skill_gap_service import (
+    SkillGapAnalyzer
+)
+
+# ==========================================
+# Skill Gap Analysis
+# ==========================================
+
+@resume_bp.route(
+    "/skill-gap/<int:id>"
+)
+@login_required
+def skill_gap(id):
+
+    resume = Resume.query.get_or_404(
+        id
+    )
+
+    parser = ResumeParser(
+        resume.file_path
+    )
+
+    parsed_data = parser.parse()
+
+    analyzer = SkillGapAnalyzer(
+
+        parsed_data["skills"],
+
+        "AI Engineer"
+    )
+
+    report = analyzer.analyze()
+
+    return render_template(
+        "skill_gap_report.html",
+        report=report
+    )
+

@@ -35,4 +35,8 @@ SKILLS = [
     "aws",
     "azure",
     "docker"
+
+    "tensorflow",
+    "pytorch",
+    "opencv",
 ]

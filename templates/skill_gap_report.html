@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card shadow p-4">
+
+<h2>
+Skill Gap Analysis
+</h2>
+
+<hr>
+
+<h3>
+
+Target Career:
+
+{{ report.career }}
+
+</h3>
+
+<hr>
+
+<h4>
+Required Skills
+</h4>
+
+<ul>
+
+{% for skill in report.required_skills %}
+
+<li>{{ skill }}</li>
+
+{% endfor %}
+
+</ul>
+
+<hr>
+
+<h4>
+Missing Skills
+</h4>
+
+<ul>
+
+{% for skill in report.missing_skills %}
+
+<li>{{ skill }}</li>
+
+{% endfor %}
+
+</ul>
+
+</div>
+
+{% endblock %}
