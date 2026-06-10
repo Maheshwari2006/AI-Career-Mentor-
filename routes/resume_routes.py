@@ -32,11 +32,19 @@ from services.ats_service import (
     ATSAnalyzer
 )
 
+from services.jd_matching_service import (
+    JDMatcher
+)
+
 resume_bp = Blueprint(
     "resume",
     __name__
 )
 
+
+# ==========================================
+# Upload Resume
+# ==========================================
 
 @resume_bp.route(
     "/upload-resume",
@@ -50,19 +58,27 @@ def upload_resume():
         if "resume" not in request.files:
 
             flash("No File Selected")
-            return redirect(request.url)
+            return redirect(
+                request.url
+            )
 
         file = request.files["resume"]
 
         if file.filename == "":
 
             flash("Please Select a File")
-            return redirect(request.url)
+            return redirect(
+                request.url
+            )
 
-        if file and allowed_file(file.filename):
+        if file and allowed_file(
+            file.filename
+        ):
 
             os.makedirs(
-                current_app.config["UPLOAD_FOLDER"],
+                current_app.config[
+                    "UPLOAD_FOLDER"
+                ],
                 exist_ok=True
             )
 
@@ -85,7 +101,10 @@ def upload_resume():
                 file_path=filepath
             )
 
-            db.session.add(resume)
+            db.session.add(
+                resume
+            )
+
             db.session.commit()
 
             flash(
@@ -101,7 +120,13 @@ def upload_resume():
     )
 
 
-@resume_bp.route("/resume-history")
+# ==========================================
+# Resume History
+# ==========================================
+
+@resume_bp.route(
+    "/resume-history"
+)
 @login_required
 def resume_history():
 
@@ -114,6 +139,10 @@ def resume_history():
         resumes=resumes
     )
 
+
+# ==========================================
+# Download Resume
+# ==========================================
 
 @resume_bp.route(
     "/download/<filename>"
@@ -129,6 +158,10 @@ def download_resume(filename):
         as_attachment=True
     )
 
+
+# ==========================================
+# Resume Parser
+# ==========================================
 
 @resume_bp.route(
     "/parse-resume/<int:id>"
@@ -151,6 +184,10 @@ def parse_resume(id):
         result=result
     )
 
+
+# ==========================================
+# ATS Analyzer
+# ==========================================
 
 @resume_bp.route(
     "/ats-analyzer/<int:id>"
@@ -177,4 +214,46 @@ def ats_analyzer(id):
     return render_template(
         "ats_report.html",
         report=report
+    )
+
+
+# ==========================================
+# Resume vs Job Description Matching
+# ==========================================
+
+@resume_bp.route(
+    "/match-job/<int:id>",
+    methods=["GET", "POST"]
+)
+@login_required
+def match_job(id):
+
+    resume = Resume.query.get_or_404(
+        id
+    )
+
+    if request.method == "POST":
+
+        job_description = request.form.get(
+            "job_description"
+        )
+
+        parser = ResumeParser(
+            resume.file_path
+        )
+
+        matcher = JDMatcher(
+            parser.text,
+            job_description
+        )
+
+        report = matcher.analyze()
+
+        return render_template(
+            "jd_match_report.html",
+            report=report
+        )
+
+    return render_template(
+        "jd_match_form.html"
     )

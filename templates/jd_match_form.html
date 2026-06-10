@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card shadow p-4">
+
+<h2>
+Job Description Matching
+</h2>
+
+<hr>
+
+<form method="POST">
+
+<div class="mb-3">
+
+<label>
+Paste Job Description
+</label>
+
+<textarea
+name="job_description"
+class="form-control"
+rows="10"
+required>
+</textarea>
+
+</div>
+
+<button
+type="submit"
+class="btn btn-primary">
+
+Analyze Match
+
+</button>
+
+</form>
+
+</div>
+
+{% endblock %}

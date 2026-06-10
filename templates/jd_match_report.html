@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card shadow p-4">
+
+<h2>
+Job Match Report
+</h2>
+
+<hr>
+
+<h3>
+
+Match Score:
+
+<span class="badge bg-success">
+
+{{ report.match_score }}%
+
+</span>
+
+</h3>
+
+<hr>
+
+<h4>
+Matched Skills
+</h4>
+
+<ul>
+
+{% for skill in report.matched_skills %}
+
+<li>{{ skill }}</li>
+
+{% endfor %}
+
+</ul>
+
+<hr>
+
+<h4>
+Missing Skills
+</h4>
+
+<ul>
+
+{% for skill in report.missing_skills %}
+
+<li>{{ skill }}</li>
+
+{% endfor %}
+
+</ul>
+
+</div>
+
+{% endblock %}
