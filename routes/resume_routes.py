@@ -36,6 +36,10 @@ from services.jd_matching_service import (
     JDMatcher
 )
 
+from services.career_service import (
+    CareerPredictor
+)
+
 resume_bp = Blueprint(
     "resume",
     __name__
@@ -58,18 +62,14 @@ def upload_resume():
         if "resume" not in request.files:
 
             flash("No File Selected")
-            return redirect(
-                request.url
-            )
+            return redirect(request.url)
 
         file = request.files["resume"]
 
         if file.filename == "":
 
             flash("Please Select a File")
-            return redirect(
-                request.url
-            )
+            return redirect(request.url)
 
         if file and allowed_file(
             file.filename
@@ -256,4 +256,36 @@ def match_job(id):
 
     return render_template(
         "jd_match_form.html"
+    )
+
+
+# ==========================================
+# Career Prediction
+# ==========================================
+
+@resume_bp.route(
+    "/career-prediction/<int:id>"
+)
+@login_required
+def career_prediction(id):
+
+    resume = Resume.query.get_or_404(
+        id
+    )
+
+    parser = ResumeParser(
+        resume.file_path
+    )
+
+    parsed_data = parser.parse()
+
+    predictor = CareerPredictor()
+
+    result = predictor.predict(
+        parsed_data["skills"]
+    )
+
+    return render_template(
+        "career_prediction.html",
+        result=result
     )

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card shadow p-4">
+
+<h2>
+Career Prediction
+</h2>
+
+<hr>
+
+<h3>
+
+Recommended Career:
+
+<span class="text-primary">
+
+{{ result.career }}
+
+</span>
+
+</h3>
+
+<hr>
+
+<h4>
+
+Confidence Score:
+
+{{ result.confidence }}%
+
+</h4>
+
+</div>
+
+{% endblock %}
