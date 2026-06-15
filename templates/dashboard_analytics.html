@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card shadow p-4">
+
+    <h2>
+        Dashboard Analytics
+    </h2>
+
+    <hr>
+
+    <div class="row">
+
+        <div class="col-md-3">
+
+            <div class="card p-3">
+
+                <h4>
+                    Skills
+                </h4>
+
+                <h2>
+                    {{ report.skills_count }}
+                </h2>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="card p-3">
+
+                <h4>
+                    Projects
+                </h4>
+
+                <h2>
+                    {{ report.projects_count }}
+                </h2>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="card p-3">
+
+                <h4>
+                    Experience
+                </h4>
+
+                <h2>
+                    {{ report.experience_count }}
+                </h2>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="card p-3">
+
+                <h4>
+                    Education
+                </h4>
+
+                <h2>
+                    {{ report.education_count }}
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <hr>
+
+    <h4>
+        Recommended Career
+    </h4>
+
+    <p>
+        {{ report.career }}
+    </p>
+
+</div>
+
+{% endblock %}

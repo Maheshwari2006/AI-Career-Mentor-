@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card shadow p-4">
+
+    <h2>
+        Resume Improvement Suggestions
+    </h2>
+
+    <hr>
+
+    <ul>
+
+        {% for suggestion in suggestions %}
+
+            <li>
+                {{ suggestion }}
+            </li>
+
+        {% endfor %}
+
+    </ul>
+
+</div>
+
+{% endblock %}

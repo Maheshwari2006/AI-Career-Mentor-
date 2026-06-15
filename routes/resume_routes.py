@@ -398,3 +398,73 @@ def interview_questions(id):
         "interview_questions.html",
         questions=questions
     )
+
+# ==========================================
+# Resume Improvement Suggestions
+# ==========================================
+
+from services.resume_improvement_service import (
+    ResumeImprovementService
+)
+
+@resume_bp.route(
+    "/resume-improvement/<int:id>"
+)
+@login_required
+def resume_improvement(id):
+
+    resume = Resume.query.get_or_404(
+        id
+    )
+
+    parser = ResumeParser(
+        resume.file_path
+    )
+
+    parsed_data = parser.parse()
+
+    service = ResumeImprovementService(
+        parsed_data
+    )
+
+    suggestions = service.analyze()
+
+    return render_template(
+        "resume_improvement.html",
+        suggestions=suggestions
+    )
+
+# ==========================================
+# Dashboard Analytics
+# ==========================================
+
+from services.dashboard_service import (
+    DashboardService
+)
+
+@resume_bp.route(
+    "/dashboard-analytics/<int:id>"
+)
+@login_required
+def dashboard_analytics(id):
+
+    resume = Resume.query.get_or_404(
+        id
+    )
+
+    parser = ResumeParser(
+        resume.file_path
+    )
+
+    parsed_data = parser.parse()
+
+    service = DashboardService(
+        parsed_data
+    )
+
+    report = service.generate()
+
+    return render_template(
+        "dashboard_analytics.html",
+        report=report
+    )
