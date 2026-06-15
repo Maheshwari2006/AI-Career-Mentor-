@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card shadow p-4">
+
+    <h2>
+        AI Interview Questions
+    </h2>
+
+    <hr>
+
+    {% for skill, questions in questions.items() %}
+
+        <h4>{{ skill }}</h4>
+
+        <ul>
+
+            {% for question in questions %}
+
+                <li>{{ question }}</li>
+
+            {% endfor %}
+
+        </ul>
+
+        <hr>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

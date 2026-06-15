@@ -366,3 +366,35 @@ def roadmap(id):
         "roadmap.html",
         roadmap=roadmap
     )
+# ==========================================
+# Interview Question Generator
+# ==========================================
+from services.interview_service import (
+    InterviewGenerator
+)
+@resume_bp.route(
+    "/interview/<int:id>"
+)
+@login_required
+def interview_questions(id):
+
+    resume = Resume.query.get_or_404(
+        id
+    )
+
+    parser = ResumeParser(
+        resume.file_path
+    )
+
+    parsed_data = parser.parse()
+
+    generator = InterviewGenerator(
+        parsed_data["skills"]
+    )
+
+    questions = generator.generate()
+
+    return render_template(
+        "interview_questions.html",
+        questions=questions
+    )
