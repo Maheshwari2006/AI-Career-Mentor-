@@ -327,4 +327,42 @@ def skill_gap(id):
         "skill_gap_report.html",
         report=report
     )
+# ==========================================
+# Learning Roadmap
+# ==========================================
+from services.roadmap_service import (
+    RoadmapGenerator
+)
+@resume_bp.route(
+    "/roadmap/<int:id>"
+)
+@login_required
+def roadmap(id):
 
+    resume = Resume.query.get_or_404(
+        id
+    )
+
+    parser = ResumeParser(
+        resume.file_path
+    )
+
+    parsed_data = parser.parse()
+
+    analyzer = SkillGapAnalyzer(
+        parsed_data["skills"],
+        "AI Engineer"
+    )
+
+    report = analyzer.analyze()
+
+    generator = RoadmapGenerator(
+        report["missing_skills"]
+    )
+
+    roadmap = generator.generate()
+
+    return render_template(
+        "roadmap.html",
+        roadmap=roadmap
+    )

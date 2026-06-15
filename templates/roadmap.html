@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card shadow p-4">
+
+<h2>
+Learning Roadmap
+</h2>
+
+<hr>
+
+{% for skill, steps in roadmap.items() %}
+
+<h4>
+
+{{ skill }}
+
+</h4>
+
+<ul>
+
+{% for step in steps %}
+
+<li>
+
+{{ step }}
+
+</li>
+
+{% endfor %}
+
+</ul>
+
+<hr>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}
