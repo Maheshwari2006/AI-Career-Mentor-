@@ -468,3 +468,67 @@ def dashboard_analytics(id):
         "dashboard_analytics.html",
         report=report
     )
+
+# ==========================================
+# PDF Report Export 
+# ==========================================
+
+from services.pdf_service import (
+    PDFReportGenerator
+)
+
+@resume_bp.route(
+    "/pdf-report/<int:id>"
+)
+@login_required
+def pdf_report(id):
+
+    resume = Resume.query.get_or_404(
+        id
+    )
+
+    parser = ResumeParser(
+        resume.file_path
+    )
+
+    parsed_data = parser.parse()
+
+    report_data = {
+
+        "Skills":
+        ", ".join(
+            parsed_data["skills"]
+        ),
+
+        "Projects":
+        len(
+            parsed_data["projects"]
+        ),
+
+        "Experience":
+        len(
+            parsed_data["experience"]
+        ),
+
+        "Education":
+        len(
+            parsed_data["education"]
+        )
+    }
+
+    filename = (
+        f"report_{id}.pdf"
+    )
+
+    generator = PDFReportGenerator(
+        filename,
+        report_data
+    )
+
+    generator.generate()
+
+    return send_from_directory(
+        ".",
+        filename,
+        as_attachment=True
+    )
