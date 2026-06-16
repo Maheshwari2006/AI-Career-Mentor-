@@ -6,6 +6,8 @@ import pytesseract
 from pdf2image import convert_from_path
 from nlp.skills_db import SKILLS
 
+nlp/resume_parser.py
+
 # Tesseract Path
 pytesseract.pytesseract.tesseract_cmd = (
     r"C:\Program Files\Tesseract-OCR\tesseract.exe"
