@@ -1,3 +1,4 @@
+import os 
 import re
 import PyPDF2
 import spacy
@@ -69,15 +70,19 @@ class ResumeParser:
 
                 print("OCR Error:", e)
 
-        print("================================")
-        print("PDF PATH:", self.pdf_path)
-        print("TEXT LENGTH:", len(text))
-        print("TEXT PREVIEW:", text[:500])
-        print("=================================\n")
+                print("================================")
+                print("PDF PATH:", self.pdf_path)
+                print("TEXT LENGTH:", len(text))
+                print("TEXT PREVIEW:", text[:500])
+                print("=================================\n")
 
-        print("\n===== EXTRACTED RESUME TEXT =====")
-        print(text[:1000])   # avoid huge logs
-        print("=================================\n")
+                print("\n===== EXTRACTED RESUME TEXT =====")
+                print(text[:1000])   # avoid huge logs
+                print("=================================\n")
+
+                print("PDF PATH:", self.pdf_path)
+                print("FILE EXISTS:", os.path.exists(self.pdf_path))
+                print("TEXT LENGTH:", len(text))
 
         return text.lower()
 
