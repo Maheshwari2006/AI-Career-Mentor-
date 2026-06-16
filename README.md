@@ -16,7 +16,7 @@ Dashboard Analytics
 PDF Report Export
 
 
-Tech Stack
+### Tech Stack
 Python
 Flask
 MySQL
@@ -28,8 +28,7 @@ Tesseract OCR
 Machine Learning
 ReportLab
 Project Structure
-=======
-## Tech Stack
+
 
 ### Backend
 
