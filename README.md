@@ -1,5 +1,7 @@
-AI Career Mentor
-AI Career Mentor is an intelligent career guidance platform built using Flask, Python, NLP, OCR, and Machine Learning.
+# AI Career Mentor
+
+AI Career Mentor is an intelligent career guidance platform built using Flask, Python, NLP, OCR, and Machine Learning. The platform helps users analyze resumes, identify skill gaps, receive career recommendations, and improve job readiness.
+>>>>>>> ed91ff1 (Improve README formatting)
 
 Features
 Resume Upload & Management
@@ -15,6 +17,7 @@ Dashboard Analytics
 PDF Report Export
 
 
+<<<<<<< HEAD
 Tech Stack
 Python
 Flask
@@ -27,8 +30,37 @@ Tesseract OCR
 Machine Learning
 ReportLab
 Project Structure
+=======
+## Tech Stack
 
+### Backend
+
+* Python
+* Flask
+* MySQL
+
+### Frontend
+
+* HTML
+* CSS
+* Bootstrap
+
+### AI & NLP
+
+* Natural Language Processing (NLP)
+* Tesseract OCR
+* Machine Learning
+
+### Reporting
+
+* ReportLab
+
+## Project Structure
+>>>>>>> ed91ff1 (Improve README formatting)
+
+```text
 AI_Career_Mentor/
+<<<<<<< HEAD
 
 routes/
 services/
@@ -37,12 +69,56 @@ static/
 uploads/
 database/
 Installation
+=======
+├── routes/
+├── services/
+├── templates/
+├── static/
+├── uploads/
+├── database/
+├── ml/
+├── nlp/
+├── app.py
+├── requirements.txt
+└── README.md
+```
+
+## Installation
+
+### Clone the Repository
+
+```bash
+>>>>>>> ed91ff1 (Improve README formatting)
 git clone https://github.com/Maheshwari2006/AI-Career-Mentor-.git
 cd AI_Career_Mentor
+```
+
+### Install Dependencies
+
+```bash
 pip install -r requirements.txt
+```
+
+### Run the Application
+
+```bash
 python app.py
 
+<<<<<<< HEAD
 Demo link : Live Demo: https://ai-career-mentor-f69d.onrender.com
 
 Author
 Maheshwari Rewatkar
+=======
+## Live Demo
+
+https://ai-career-mentor-f69d.onrender.com
+
+## Author
+
+**Maheshwari Rewatkar**
+
+B.Tech – Artificial Intelligence
+
+G H Raisoni College of Engineering & Management, Nagpur
+>>>>>>> ed91ff1 (Improve README formatting)
