@@ -16,7 +16,6 @@ Dashboard Analytics
 PDF Report Export
 
 
-<<<<<<< HEAD
 Tech Stack
 Python
 Flask
