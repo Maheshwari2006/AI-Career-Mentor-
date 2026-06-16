@@ -1,7 +1,6 @@
 # AI Career Mentor
 
 AI Career Mentor is an intelligent career guidance platform built using Flask, Python, NLP, OCR, and Machine Learning. The platform helps users analyze resumes, identify skill gaps, receive career recommendations, and improve job readiness.
->>>>>>> ed91ff1 (Improve README formatting)
 
 Features
 Resume Upload & Management
