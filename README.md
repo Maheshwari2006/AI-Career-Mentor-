@@ -49,6 +49,9 @@ pip install -r requirements.txt
 python app.py
 ```
 
+Demo link :
+Live Demo: https://ai-career-mentor-f69d.onrender.com
+
 ## Author
 
 Maheshwari Rewatkar
