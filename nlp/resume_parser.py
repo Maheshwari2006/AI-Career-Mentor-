@@ -69,8 +69,14 @@ class ResumeParser:
 
                 print("OCR Error:", e)
 
+        print("================================")
+        print("PDF PATH:", self.pdf_path)
+        print("TEXT LENGTH:", len(text))
+        print("TEXT PREVIEW:", text[:500])
+        print("=================================\n")
+
         print("\n===== EXTRACTED RESUME TEXT =====")
-        print(text)
+        print(text[:1000])   # avoid huge logs
         print("=================================\n")
 
         return text.lower()
