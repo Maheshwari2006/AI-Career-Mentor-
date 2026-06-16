@@ -102,7 +102,6 @@ pip install -r requirements.txt
 ```bash
 python app.py
 
-<<<<<<< HEAD
 Demo link : Live Demo: https://ai-career-mentor-f69d.onrender.com
 
 Author
